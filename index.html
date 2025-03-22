@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Finance Toolkit</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="glass-container">
+        <nav class="cyber-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-calculator logo-icon"></i>
+                <h1>Finance Toolkit</h1>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="showCalculator('emi')"><i class="fas fa-credit-card"></i> EMI</button>
+                <button class="nav-btn" onclick="showCalculator('compound')"><i class="fas fa-chart-line"></i> Compound</button>
+                <button class="nav-btn" onclick="showCalculator('salary')"><i class="fas fa-money-bill-wave"></i> Salary</button>
+                <button class="nav-btn" onclick="showCalculator('gst')"><i class="fas fa-percent"></i> GST</button>
+                <button class="nav-btn" onclick="showCalculator('age')"><i class="fas fa-birthday-cake"></i> Age</button>
+                <button class="nav-btn" onclick="showCalculator('qr')"><i class="fas fa-qrcode"></i> QR Code</button>
+            </div>
+        </nav>
+
+        <main class="content-grid">
+            <!-- EMI Calculator -->
+            <div id="emi" class="calculator glass-card active">
+    <h3 class="calc-title"><i class="fas fa-credit-card"></i> EMI Calculator</h3>
+    <label>Loan Amount:</label>
+    <input type="number" id="loanAmount" placeholder="₹ Enter amount">
+    <label>Interest Rate (%):</label>
+    <input type="number" id="interestRate" placeholder="% Annual rate">
+    <label>Loan Tenure (years):</label>
+    <input type="number" id="loanTenure" placeholder="Years">
+    <button onclick="calculateEMI()">Calculate</button>
+    <p id="emiResult"></p>
+    
+    <div id="scheduleSection" style="display: none;">
+        <div class="schedule-header">
+            <h4>Monthly Repayment Schedule</h4>
+            <button onclick="exportToCSV()" class="download-btn">
+                <i class="fas fa-download"></i> Download CSV
+            </button>
+        </div>
+        <div class="schedule-table-container">
+            <table id="repaymentSchedule">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Payment</th>
+                        <th>Principal</th>
+                        <th>Interest</th>
+                        <th>Remaining</th>
+                    </tr>
+                </thead>
+                <tbody id="scheduleBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+            <!-- Compound Interest Calculator -->
+            <div id="compound" class="calculator glass-card">
+    <h3 class="calc-title"><i class="fas fa-chart-line"></i> Compound Interest Calculator</h3>
+    
+    <div class="dual-inputs">
+        <div class="input-group">
+            <label>Lump Sum Investment:</label>
+            <input type="number" id="principal" placeholder="₹ Initial amount">
+        </div>
+        <div class="input-group">
+            <label>Monthly SIP:</label>
+            <input type="number" id="sipAmount" placeholder="₹ Monthly investment">
+        </div>
+    </div>
+
+    <div class="common-inputs">
+        <label>Annual Rate of Return (%):</label>
+        <input type="number" id="rate" placeholder="% Expected return">
+        
+        <label>Investment Period (years):</label>
+        <input type="number" id="time" placeholder="Years">
+    </div>
+
+    <button onclick="calculateCompound()">Calculate</button>
+    
+    <div class="dual-results">
+        <div class="result-card" id="lumpSumResult">
+            <h4>Lump Sum Investment</h4>
+            <p class="result-amount">₹0</p>
+            <div class="result-details"></div>
+        </div>
+        
+        <div class="result-card" id="sipResult">
+            <h4>SIP Investment</h4>
+            <p class="result-amount">₹0</p>
+            <div class="result-details"></div>
+        </div>
+    </div>
+    
+    <canvas id="compoundChart"></canvas>
+</div>
+
+            <!-- Salary Calculator -->
+            <div id="salary" class="calculator glass-card">
+                <h3 class="calc-title"><i class="fas fa-money-bill-wave"></i> Salary Calculator</h3>
+                <label>Basic Salary:</label>
+                <input type="number" id="basicSalary" placeholder="₹ Basic salary">
+                <label>HRA (%):</label>
+                <input type="number" id="hra" placeholder="% HRA">
+                <label>DA (%):</label>
+                <input type="number" id="da" placeholder="% DA">
+                <label>Other Allowances:</label>
+                <input type="number" id="other" placeholder="₹ Other">
+                <label>Tax (%):</label>
+                <input type="number" id="tax" placeholder="% Tax">
+                <button onclick="calculateSalary()">Calculate</button>
+                <p id="salaryResult"></p>
+            </div>
+
+            <!-- GST Calculator -->
+            <div id="gst" class="calculator glass-card">
+                <h3 class="calc-title"><i class="fas fa-percent"></i> GST Calculator</h3>
+                <label>Amount:</label>
+                <input type="number" id="amount" placeholder="₹ Enter amount">
+                <label>GST Rate (%):</label>
+                <input type="number" id="gstRate" placeholder="% GST rate">
+                <button onclick="calculateGST()">Calculate</button>
+                <p id="gstResult"></p>
+            </div>
+
+            <!-- Age Calculator -->
+            <div id="age" class="calculator glass-card">
+                <h3 class="calc-title"><i class="fas fa-birthday-cake"></i> Age Calculator</h3>
+                <label>Date of Birth:</label>
+                <input type="date" id="dob">
+                <button onclick="calculateAge()">Calculate</button>
+                <p id="ageResult"></p>
+            </div>
+
+            <!-- QR Generator -->
+            <div id="qr" class="calculator glass-card">
+                <h3 class="calc-title"><i class="fas fa-qrcode"></i> QR Generator</h3>
+                <label>Text/URL:</label>
+                <input type="text" id="qrText" placeholder="Enter content">
+                <button onclick="generateQR()">Generate</button>
+                <div id="qrCode"></div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
