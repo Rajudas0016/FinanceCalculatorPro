@@ -298,6 +298,36 @@ function showResult(elementId, text) {
     element.offsetHeight; // Trigger reflow
     element.style.animation = 'fadeIn 0.5s ease';
 }
+// Legal Pages Functions
+function showLegalPage(pageId) {
+    // Hide all legal pages
+    document.querySelectorAll('.legal-page').forEach(page => {
+        page.style.display = 'none';
+    });
+    
+    // Show requested page
+    const page = document.getElementById(pageId);
+    page.style.display = 'block';
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function closeLegalPage() {
+    document.querySelectorAll('.legal-page').forEach(page => {
+        page.style.display = 'none';
+    });
+}
+
+// Close legal page when clicking outside
+window.onclick = function(event) {
+    const legalPages = document.querySelectorAll('.legal-page');
+    legalPages.forEach(page => {
+        if (event.target === page) {
+            page.style.display = 'none';
+        }
+    });
+}
 
 // Initialize first calculator
 showCalculator('emi');
