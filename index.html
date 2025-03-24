@@ -154,5 +154,57 @@
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="app.js"></script>
+  
+  <!-- Legal Pages -->
+<div id="legalPages" class="legal-container">
+    <div id="termsPage" class="legal-page">
+        <div class="legal-content">
+            <h3>Terms & Conditions</h3>
+            <button class="close-btn" onclick="closeLegalPage()">&times;</button>
+            <div class="legal-text">
+                <p>Last updated: [Date]</p>
+                <!-- Add your terms content here -->
+                <h4>1. Acceptance of Terms</h4>
+                <p>By using this website, you agree to be bound by these Terms and Conditions...</p>
+                <!-- Add more sections as needed -->
+            </div>
+        </div>
+    </div>
+
+    <div id="privacyPage" class="legal-page">
+        <div class="legal-content">
+            <h3>Privacy Policy</h3>
+            <button class="close-btn" onclick="closeLegalPage()">&times;</button>
+            <div class="legal-text">
+                <p>Last updated: [Date]</p>
+                <h4>Information Collection</h4>
+                <p>We do not collect any personal information...</p>
+                <!-- Add more sections as needed -->
+            </div>
+        </div>
+    </div>
+
+    <div id="disclaimerPage" class="legal-page">
+        <div class="legal-content">
+            <h3>Disclaimer</h3>
+            <button class="close-btn" onclick="closeLegalPage()">&times;</button>
+            <div class="legal-text">
+                <p>The calculations provided on this website are for illustrative purposes only...</p>
+                <!-- Add more sections as needed -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="main-footer">
+    <div class="footer-links">
+        <a href="javascript:void(0)" onclick="showLegalPage('termsPage')">Terms & Conditions</a>
+        <a href="javascript:void(0)" onclick="showLegalPage('privacyPage')">Privacy Policy</a>
+        <a href="javascript:void(0)" onclick="showLegalPage('disclaimerPage')">Disclaimer</a>
+    </div>
+    <p class="copyright">&copy; 2024 Financial Toolkit. All rights reserved.</p>
+</footer>
+  
 </body>
 </html>
